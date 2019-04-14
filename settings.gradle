@@ -1,1 +1,1 @@
-include ':app', ':LeafWall', ':Transparent'
+include ':app', ':LeafWall', ':Transparent', ':SomeCustom'

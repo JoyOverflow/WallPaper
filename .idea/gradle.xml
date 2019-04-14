@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LeafWall" />
+            <option value="$PROJECT_DIR$/SomeCustom" />
             <option value="$PROJECT_DIR$/Transparent" />
             <option value="$PROJECT_DIR$/app" />
           </set>
