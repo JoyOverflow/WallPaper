@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         intent2.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
 
         //名字和图标
-        intent2.putExtra("android.intent.extra.shortcut.NAME", getString(R.string.app_name));
-        intent2.putExtra("android.intent.extra.shortcut.ICON_RESOURCE",
+        intent2.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
+        intent2.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                 Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher));
 
         //设置不允许重复创建（extra.shortcut.INTENT键的value）
