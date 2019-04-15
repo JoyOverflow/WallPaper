@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        //设置手机的壁纸
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         try {
             wallpaperManager.setResource(R.raw.dragon);

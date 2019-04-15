@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/r1"
     android:clickable="true"
+    android:focusable="true"
     android:longClickable="true"
     tools:context=".MainActivity">
 

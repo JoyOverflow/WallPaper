@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ButtonList" />
+            <option value="$PROJECT_DIR$/CircularImage" />
             <option value="$PROJECT_DIR$/LeafWall" />
             <option value="$PROJECT_DIR$/Shortcut" />
             <option value="$PROJECT_DIR$/SomeCustom" />
