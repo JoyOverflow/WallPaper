@@ -5,12 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/r_layout"
 
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
+
+    <ImageView android:id="@+id/imageView"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_gravity="center"
+               android:background="@android:color/holo_purple"/>
 
 <!--<pxgd.hyena.com.circularimage.CircularImageButton-->
     <!--android:layout_width="wrap_content"-->
@@ -23,6 +26,8 @@
         android:id="@+id/pic1"
         android:layout_width="62dp"
         android:layout_height="110dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="false"
@@ -35,7 +40,7 @@
         android:textSize="10sp"
         app:imagePadding="1dp"
         app:overlay="#000000"
-        app:overlayAlpha="0.4"
+        app:overlayAlpha="0.2"
         app:textPadding="15dp"/>
 
     <pxgd.hyena.com.circularimage.VImageButtonView
@@ -43,36 +48,87 @@
         android:layout_width="62dp"
         android:layout_height="110dp"
         android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/pic1"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:scaleType="centerCrop"
-        android:src="@drawable/button"
+        android:src="@drawable/elves_2"
         android:text=""
         android:textColor="#f0f"
-        android:textSize="13sp"
-        app:imagePadding="20dp"
+        android:textSize="10sp"
+        app:imagePadding="1dp"
         app:overlay="#000000"
-        app:overlayAlpha="0.4"
+        app:overlayAlpha="0.2"
         app:textPadding="15dp"/>
 
     <pxgd.hyena.com.circularimage.VImageButtonView
         android:id="@+id/pic3"
         android:layout_width="62dp"
         android:layout_height="110dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/pic2"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:scaleType="centerCrop"
-        android:src="@drawable/button"
-        android:text="Demo App"
+        android:src="@drawable/centaur_2"
+        android:text=""
         android:textColor="#f0f"
-        android:textSize="13sp"
-        app:imagePadding="20dp"
+        android:textSize="10sp"
+        app:imagePadding="1dp"
         app:overlay="#000000"
         app:overlayAlpha="0.4"
         app:textPadding="15dp"/>
+
+    <pxgd.hyena.com.circularimage.VImageButtonView
+        android:id="@+id/pic4"
+        android:layout_width="62dp"
+        android:layout_height="110dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/pic3"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/car_house_2"
+        android:text=""
+        android:textColor="#f0f"
+        android:textSize="10sp"
+        app:imagePadding="1dp"
+        app:overlay="#000000"
+        app:overlayAlpha="0.4"
+        app:textPadding="15dp"/>
+    <pxgd.hyena.com.circularimage.VImageButtonView
+        android:id="@+id/pic5"
+        android:layout_width="62dp"
+        android:layout_height="110dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/pic4"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mountain_2"
+        android:text=""
+        android:textColor="#f0f"
+        android:textSize="10sp"
+        app:imagePadding="1dp"
+        app:overlay="#000000"
+        app:overlayAlpha="0.4"
+        app:textPadding="15dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_edit"/>
+
 </RelativeLayout>
