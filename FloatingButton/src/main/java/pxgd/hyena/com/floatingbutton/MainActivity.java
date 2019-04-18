@@ -25,19 +25,25 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this,
+                mDrawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        //设置导航条的选中项
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+        navigationView.setCheckedItem(R.id.home);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment, new HomeFragment()).commit();
         }
-
-        navigationView.setCheckedItem(R.id.home);
     }
 
     @Override
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-
             Fragment fragment = null;
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
