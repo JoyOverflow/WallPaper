@@ -9,18 +9,15 @@
     android:focusable="true"
     android:longClickable="true"
     tools:context=".MainActivity">
-
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/button"
-        android:text="QQQQQ"
+        android:text="@string/btn_name"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="30dp"
+        android:layout_margin="35dp"
         android:background="@drawable/button"
         android:elevation="10dp"
         android:translationZ="5dp" />
-
 </RelativeLayout>

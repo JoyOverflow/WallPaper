@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -60,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         //获取到头部视图
         View headerView = navigation.getHeaderView(0);
 
+
+        //第一次创建时加载片段
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment, new HomeFragment())
+                    .commit();
+        }
+
     }
     /**
      * 如果有抽屉打开则关闭抽屉
@@ -78,13 +89,32 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 菜单项点击事件（点击菜单项才触发）
+     * 菜单项点击时切换片段
      */
     NavigationView.OnNavigationItemSelectedListener navSelectedListener =
             new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Log.d(TAG, "onNavigationItemSelected！");
-            return false;
+
+            //首先关闭抽屉
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+
+            Fragment fragment = null;
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.home:
+                    fragment = new HomeFragment();
+                    break;
+                case R.id.menus:
+                    fragment = new MenusFragment();
+                    break;
+                case R.id.progress:
+                    fragment = new ProgressFragment();
+                    break;
+            }
+            ft.replace(R.id.fragment, fragment).commit();
+            return true;
         }
     };
 
