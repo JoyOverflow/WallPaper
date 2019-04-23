@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 //创建随机数（默认当前系统时间的毫秒数作为种子）
                 Random rand = new Random();
-                //产生随机为0-255的整数,不包括255
-                int a = rand.nextInt(255);
-                int r = rand.nextInt(255);
-                int g = rand.nextInt(255);
-                int b = rand.nextInt(255);
+                //产生随机为0-256的整数,不包括256
+                int a = rand.nextInt(256);
+                int r = rand.nextInt(256);
+                int g = rand.nextInt(256);
+                int b = rand.nextInt(256);
                 //生成随机颜色（设置布局控件的背景色）
                 int randomColor = Color.argb(a,r,g,b);
                 r1.setBackgroundColor(randomColor);
