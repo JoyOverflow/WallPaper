@@ -1,4 +1,4 @@
-package pxgd.hyena.com.mydemo.service;
+package pxgd.hyena.com.transparent.service;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -9,7 +9,6 @@ import android.net.NetworkInfo;
 
 /**
  * 网络工具类
- * 
  */
 public class NetUtils
 {

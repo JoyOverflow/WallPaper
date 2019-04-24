@@ -1,4 +1,4 @@
-package pxgd.hyena.com.mydemo;
+package pxgd.hyena.com.transparent;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,33 +12,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pxgd.hyena.com.mydemo.service.AcrosticService;
-import pxgd.hyena.com.mydemo.service.NetUtils;
+import pxgd.hyena.com.transparent.service.AcrosticService;
+import pxgd.hyena.com.transparent.service.NetUtils;
 
 public class AcrosticActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button createBtn;
+    private Button appOffersButton;
     private AcrosticService acrosticService = new AcrosticService();
-    //private ImageView copyView;
 
     //文本编辑框以及内容
     private EditText wordsEdt;
     private String words;
-
     //字数选择框以及字数
     private String num;
     private Spinner numSpinner;
-
     //藏位置选择框和藏的位置
     private String type;
     private Spinner typeSpinner;
-
     //押韵方式选择框和押韵方式
     private String yayuntype;
     private Spinner yayuntypeSpinner;
-
-
-    //结果
+    //显示查询结果
     private TextView resultView;
     //查询进度条
     private ProgressBar queryProgressBar;
@@ -47,15 +42,14 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acrostic);
+
         init();
     }
     private void init() {
         createBtn = findViewById(R.id.acrostic_create_btn);
         createBtn.setOnClickListener(this);
-
-        //copyView = findViewById(R.id.acrostic_copy);
-        //copyView.setOnClickListener(this);
-
+        appOffersButton = findViewById(R.id.appOffersButton);
+        appOffersButton.setOnClickListener(this);
         wordsEdt = findViewById(R.id.acrostic_words_edt);
         numSpinner = findViewById(R.id.acrostic_num_spinner);
         typeSpinner = findViewById(R.id.acrostic_type_spinner);
@@ -67,10 +61,6 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
     }
-
-
-
-
 
     @Override
     public void onClick(View v) {
@@ -97,20 +87,12 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), R.string.acrostic_yayuntype_prompt, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                resultView.setText("");
 
+                resultView.setText("");
                 getAcrosticInfo();
                 break;
-
-//            case R.id.acrostic_copy:
-//                String result = resultView.getText().toString();
-//                if (result != null && !result.equals("")) {
-//                    ClipboardManager clipboardManager = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-//                    clipboardManager.setText(result);
-//                    Toast.makeText(getApplicationContext(), R.string.acrostic_copy_success, Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-
+            case R.id.appOffersButton:
+                break;
             default:
                 break;
         }
@@ -133,14 +115,39 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
         protected void onPostExecute(String result) {
             queryProgressBar.setVisibility(View.GONE);
             if (result != null && !result.equals("")) {
-                //copyView.setVisibility(View.VISIBLE);
                 resultView.setText(Html.fromHtml(result));
             } else {
-                //copyView.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), R.string.acrostic_error1, Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

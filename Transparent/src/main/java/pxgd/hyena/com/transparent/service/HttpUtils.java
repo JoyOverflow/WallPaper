@@ -1,4 +1,4 @@
-package pxgd.hyena.com.mydemo.service;
+package pxgd.hyena.com.transparent.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,10 +8,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
 /**
- * Http请求的工具类
- *
- * 
+ * Http工具类
  */
 public class HttpUtils {
 	private static final int TIMEOUT_IN_MILLIONS = 60*1000;

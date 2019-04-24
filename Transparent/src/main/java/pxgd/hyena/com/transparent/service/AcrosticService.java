@@ -1,11 +1,10 @@
-package pxgd.hyena.com.mydemo.service;
+package pxgd.hyena.com.transparent.service;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * 抓取数据
- * 
  */
 public class AcrosticService {
 	@SuppressWarnings("unused")
