@@ -45,6 +45,10 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
 
         init();
     }
+
+    /**
+     * 从相对布局中查找视图
+     */
     private void init() {
         createBtn = findViewById(R.id.acrostic_create_btn);
         createBtn.setOnClickListener(this);
@@ -66,6 +70,7 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
 
+            //提交表单
             case R.id.acrostic_create_btn:
                 words = wordsEdt.getText().toString();
                 if (words == null || words.equals("")) {
@@ -87,7 +92,6 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), R.string.acrostic_yayuntype_prompt, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 resultView.setText("");
                 getAcrosticInfo();
                 break;
@@ -100,12 +104,20 @@ public class AcrosticActivity extends AppCompatActivity implements View.OnClickL
     private void getAcrosticInfo() {
         if (NetUtils.isConnected(getApplicationContext())) {
             queryProgressBar.setVisibility(View.VISIBLE);
+            //触发异步任务
             new AcrosticInfoAsyncTask().execute("");
         } else {
-            Toast.makeText(getApplicationContext(), R.string.net_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.net_error,
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
 
+    /**
+     * 异步任务内部类
+     */
     public class AcrosticInfoAsyncTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
