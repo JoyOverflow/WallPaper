@@ -2,40 +2,10 @@
     <string name="app_name">MyDemo</string>
     <string name="btn_name">确 定</string>
 
+    <string name="action_share1">发送给朋友</string>
+    <string name="action_share2">发送到朋友圈</string>
+    <string name="action_share3">发送视频给朋友</string>
+    <string name="hello_world">Hello world!</string>
 
 
-    <string name="app_idea">藏头诗生成器,一键变骚人</string>
-    <string name="exit_msg">再按一次退出</string>
-    <string name="net_error">请检查您的网络链接</string>
-    <string name="like_net_error">亲~~网络貌似出了点问题哦！！！</string>
-
-    <!-- MainActivity -->
-    <string name="acrostic_title">藏头诗生成器</string>
-    <string name="acrostic_words_hint">请填入内容&#060;最多八个字&#062;</string>
-    <string name="acrostic_create_btn">一键生成</string>
-    <string name="acrostic_num_prompt">请选择字数</string>
-    <string name="acrostic_type_prompt">请选择藏的位置</string>
-    <string name="acrostic_yayuntype_prompt">请选择押韵方式</string>
-    <string name="acrostic_baike">
-		藏头诗，又名“藏头格”，是杂体诗中的一种，有三种形式：一种是首联与中二联六句皆言所寓之景，而不点破题意，直到结联才点出主题；二是将诗头句一字暗藏于末一字中；三是将所说之事分藏于诗句之首。现在常见的是第三种，每句的第一个字连起来读，可以传达作者的某种特有的思想。同时藏头诗是诗歌中一种特殊形式的诗体，它以每句诗的头一个字嵌入你要表达的内容中的一个字。全诗的每句中的头一个字又组成一个完整的人名、地名、企业名或一句祝福。藏头诗涵义深、品位高、价值重，可谓一字千金。
-    </string>
-    <string-array name="nums">
-        <item>五言</item>
-        <item>七言</item>
-    </string-array>
-    <string-array name="types">
-        <item>藏头</item>
-        <item>藏尾</item>
-        <item>藏中</item>
-        <item>递增</item>
-        <item>递减</item>
-    </string-array>
-    <string-array name="yayuntypes">
-        <item>双句一压</item>
-        <item>双句押韵</item>
-        <item>一三四押</item>
-    </string-array>
-    <string name="acrostic_copy_success">复制成功</string>
-    <string name="acrostic_error1">未发现查询结果,请重新输入。</string>
-    <string name="appOffersButton">推荐应用</string>
 </resources>
