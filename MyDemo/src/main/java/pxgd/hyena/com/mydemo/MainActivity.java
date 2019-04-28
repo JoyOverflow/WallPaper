@@ -29,15 +29,24 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+
+        String state = Environment.getExternalStorageState();
+        if (!state.equals(Environment.MEDIA_MOUNTED)) {
+            Log.d(TAG, "外部存储未挂载！");
+        }
+        else
+            Log.d(TAG, "外部存储已就续！");
+
+
         //DIRECTORY_DCIM 相机拍摄的图片和视频保存位置
         //DIRECTORY_PICTURES 下载图片保存的位置
-        //File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        File dir = Environment.getDownloadCacheDirectory();
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File file = new File(dir, "/yidian_11832519262.jpg");
 
-
-
+        //得到（内部存储）data/data/包名/files路径
         //File dir = getFilesDir();
-        File file = new File(dir, "/104259.jpg");
+        //File file = new File(dir, "/104259.jpg");
+
         switch (item.getItemId()) {
             case R.id.action_share1:
                 Log.d(TAG, file.toURI().toString());
