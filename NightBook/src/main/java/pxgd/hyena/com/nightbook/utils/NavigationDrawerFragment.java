@@ -1,4 +1,4 @@
-package pxgd.hyena.com.snowbook.utils;
+package pxgd.hyena.com.nightbook.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,10 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.List;
 
-import pxgd.hyena.com.snowbook.R;
+import pxgd.hyena.com.nightbook.R;
+
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
@@ -36,7 +36,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private int mCurrentSelectedPosition;
     private List<NavigationItem> items = null;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,10 +45,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mDrawerList.setLayoutManager(layoutManager);
         mDrawerList.setHasFixedSize(true);
-
         return view;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +56,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             mFromSavedInstanceState = true;
         }
     }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -73,7 +69,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public ActionBarDrawerToggle getActionBarDrawerToggle() {
         return mActionBarDrawerToggle;
     }
-
     public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
         mActionBarDrawerToggle = actionBarDrawerToggle;
     }
@@ -96,11 +91,19 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerLayout.setStatusBarBackgroundColor(
                 getResources().getColor(R.color.myPrimaryDarkColor));
 
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(
+                getActivity(),
+                mDrawerLayout,
+                toolbar,
+                R.string.drawer_open,
+                R.string.drawer_close
+        )
+        {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                if (!isAdded()) return;
+                if (!isAdded())
+                    return;
                 getActivity().supportInvalidateOptionsMenu();
             }
 

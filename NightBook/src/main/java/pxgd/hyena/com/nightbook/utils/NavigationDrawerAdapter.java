@@ -1,4 +1,4 @@
-package pxgd.hyena.com.snowbook.utils;
+package pxgd.hyena.com.nightbook.utils;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pxgd.hyena.com.snowbook.R;
-import pxgd.hyena.com.snowbook.entity.Subject;
+import pxgd.hyena.com.nightbook.R;
+import pxgd.hyena.com.nightbook.entity.Subject;
+
 
 /**
  * Created by poliveira on 24/10/2014.
