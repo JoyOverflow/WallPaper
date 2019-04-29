@@ -1,9 +1,11 @@
-package pxgd.hyena.com.nightbook.utils;
+package pxgd.hyena.com.nightbook;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,9 +17,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.List;
 
-import pxgd.hyena.com.nightbook.R;
+import pxgd.hyena.com.nightbook.utils.NavigationDrawerAdapter;
+import pxgd.hyena.com.nightbook.utils.NavigationDrawerCallbacks;
+import pxgd.hyena.com.nightbook.utils.NavigationItem;
 
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
@@ -56,15 +61,37 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             mFromSavedInstanceState = true;
         }
     }
+
+
+
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            try {
+                mCallbacks = (NavigationDrawerCallbacks) activity;
+            } catch (ClassCastException e) {
+                throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
+            }
+        }
+    }
+    @TargetApi(23)
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         try {
-            mCallbacks = (NavigationDrawerCallbacks) activity;
+            mCallbacks = (NavigationDrawerCallbacks) context;
         } catch (ClassCastException e) {
             throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
         }
     }
+
+
+
+
+
+
 
     public ActionBarDrawerToggle getActionBarDrawerToggle() {
         return mActionBarDrawerToggle;
