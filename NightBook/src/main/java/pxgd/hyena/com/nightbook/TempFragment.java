@@ -1,6 +1,7 @@
 package pxgd.hyena.com.nightbook;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,20 @@ public class TempFragment extends Fragment implements NavigationDrawerCallbacks 
     private RecyclerView mDrawerList;
     private NavigationDrawerCallbacks mCallbacks;
 
+    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+    private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
+    private static final String PREFERENCES_FILE = "my_app_settings"; //TODO: change this to your file
+    public static final String KEY_NAVIGATION_ITEM = "key_navigation_item";
+    private View mFragmentContainerView;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mActionBarDrawerToggle;
+    private boolean mUserLearnedDrawer;
+    private boolean mFromSavedInstanceState;
+    private int mCurrentSelectedPosition;
+    private List<NavigationItem> items = null;
+
+
+
     public TempFragment() { }
     @Override
     public void onAttach(Context context) {
@@ -43,6 +58,12 @@ public class TempFragment extends Fragment implements NavigationDrawerCallbacks 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mUserLearnedDrawer = Boolean.valueOf(readSharedSetting(getActivity(), PREF_USER_LEARNED_DRAWER, "false"));
+        if (savedInstanceState != null) {
+            mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
+            mFromSavedInstanceState = true;
+        }
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -64,31 +85,35 @@ public class TempFragment extends Fragment implements NavigationDrawerCallbacks 
         Log.d(TAG, "onViewCreated！");
     }
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated！");
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart！");
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume！");
-    }
-    @Override
     public void onDetach() {
         super.onDetach();
-        Log.d(TAG, "onAttach！");
+        mCallbacks = null;
     }
 
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-
+        selectItem(position);
     }
+    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(settingName, settingValue);
+        editor.apply();
+    }
+    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return sharedPref.getString(settingName, defaultValue);
+    }
+    public ActionBarDrawerToggle getActionBarDrawerToggle() {
+        return mActionBarDrawerToggle;
+    }
+    public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
+        mActionBarDrawerToggle = actionBarDrawerToggle;
+    }
+
+
+
 
 
 
@@ -124,7 +149,6 @@ public class TempFragment extends Fragment implements NavigationDrawerCallbacks 
                     mUserLearnedDrawer = true;
                     saveSharedSetting(getActivity(), PREF_USER_LEARNED_DRAWER, "true");
                 }
-
                 getActivity().supportInvalidateOptionsMenu();
             }
         };
@@ -162,5 +186,16 @@ public class TempFragment extends Fragment implements NavigationDrawerCallbacks 
     }
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
+    }
+
+    void selectItem(int position) {
+        mCurrentSelectedPosition = position;
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+        ((NavigationDrawerAdapter) mDrawerList.getAdapter()).selectPosition(position);
     }
 }

@@ -3,6 +3,7 @@ package pxgd.hyena.com.nightbook.utils;
 import android.graphics.drawable.Drawable;
 import pxgd.hyena.com.nightbook.entity.Subject;
 /**
+ * 左栏的导航项
  */
 public class NavigationItem {
     private Subject mSubject;
