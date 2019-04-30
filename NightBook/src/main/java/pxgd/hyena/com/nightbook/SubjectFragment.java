@@ -53,11 +53,14 @@ public class SubjectFragment extends Fragment implements AdapterView.OnItemClick
         SubjectAdapter adapter = (SubjectAdapter) listview.getAdapter();
         Book book = adapter.getItem(position);
         if (book != null && !TextUtils.isEmpty(book.getUrl(language))){
+
             BookFragment fragment = new BookFragment();
             Bundle bundle = new Bundle();
             bundle.putString(BookFragment.BOOK_URL_KEY,book.getUrl(language));
             fragment.setArguments(bundle);
-            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container,fragment)
+                    .addToBackStack(null).commit();
         }
     }
 }
