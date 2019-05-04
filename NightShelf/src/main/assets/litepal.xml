@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+	<dbname value="BookDB"></dbname>  <!--数据库名称-->
+	<version value="1"></version>     <!--数据库版本-->
+	<list>
+		<!--配置映射类-->
+		<mapping class="pxgd.hyena.com.nightshelf.model.bean.Book">
+		</mapping>
+	</list>
+</litepal>

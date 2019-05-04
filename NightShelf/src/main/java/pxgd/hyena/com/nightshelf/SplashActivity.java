@@ -13,7 +13,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
+        //设置窗体全屏（隐藏调状态栏）
+        getWindow().setFlags(
+                WindowManager.LayoutParams. FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams. FLAG_FULLSCREEN
+        );
+
+        //2秒后启动Main活动并终止Splash活动
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);

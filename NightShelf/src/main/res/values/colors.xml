@@ -3,4 +3,37 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimaryBg">#ffffff</color>
+    <color name="colorPrimaryContentFont">#444444</color>
+    <color name="colorPrimaryContentBg">#f8f8f8</color>
+    <color name="tab_color_text_normal">#99E6EF</color>
+    <color name="tab_color_text_highlight">#ffffff</color>
+    <color name="tab_color_line">#ffffff</color>
+    <color name="fab_menu_colorNormal">@color/colorPrimary</color>
+    <color name="fab_menu_colorPressed">@color/colorPrimaryDark</color>
+    <color name="fab_menu_colorRipple">#B3E5FC</color>
+    <color name="grid_empty_icon">#bcbcbc</color>
+    <color name="grid_empty_text">#bcbcbc</color>
+    <color name="grid_rate_text">@color/colorPrimaryContentFont</color>
+    <color name="boo_cover_icon">#bcbcbc</color>
+    <color name="search_edittext_bgcolor">@color/colorPrimaryDark</color>
+    <color name="book_item_points">#fbbc05</color>
+    <color name="book_item_price_bg">#fbbc05</color>
+    <color name="book_item_textpricecolor">#ffffff</color>
+    <color name="book_item_texttitlecolor">#111111</color>
+    <color name="book_item_textcontentcolor">#444444</color>
+    <color name="boo_item_icon">#bcbcbc</color>
+    <color name="btn_color">@color/colorPrimary</color>
+    <color name="book_info_bg">@color/colorPrimaryBg</color>
+    <color name="book_info_item_tag_font">#ffffff</color>
+    <color name="book_info_item_tag_bgcolor">@color/colorPrimary</color>
+    <color name="book_info_item_font">@color/colorPrimaryContentFont</color>
+    <color name="book_intro_tag_font">@color/colorPrimary</color>
+    <color name="book_intro_font">@color/colorPrimaryContentFont</color>
+    <color name="book_note_tag_font">#9B9B9B</color>
+    <color name="google_blue">#4285f4</color>
+    <color name="google_red">#ea4335</color>
+    <color name="google_yellow">#fbbc05</color>
+    <color name="google_green">#34a853</color>
 </resources>
