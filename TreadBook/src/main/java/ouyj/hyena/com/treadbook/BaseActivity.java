@@ -9,55 +9,55 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-
-
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 2016/7/8 0008.
+ * 活动的基类
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
 
+
     /**
-     * 初始化布局
+     * 活动创建
+     * @param savedInstanceState
      */
-    public abstract int getLayoutRes();
-
-    protected abstract void initData();
-
-    protected abstract void initListener();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(getLayoutRes());
-        // 初始化View注入
+
         ButterKnife.bind(this);
-        
         initData();
         initListener();
     }
-
+    public abstract int getLayoutRes();
+    protected abstract void initData();
+    protected abstract void initListener();
     @Override
     protected void onResume() {
         super.onResume();
-        //MobclickAgent.onResume(this);
     }
-
     @Override
     protected void onPause() {
         super.onPause();
-        //MobclickAgent.onPause(this);
     }
-
+    /**
+     * 活动撤销
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
+
+
+
+
+
+
 
     public void showProgress(boolean flag, String message) {
         if (mProgressDialog == null) {
@@ -69,16 +69,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mProgressDialog.show();
     }
-
     public void hideProgress() {
         if (mProgressDialog == null)
             return;
-
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
     }
-
     /**
      * 检查是否拥有权限
      * @param thisActivity
