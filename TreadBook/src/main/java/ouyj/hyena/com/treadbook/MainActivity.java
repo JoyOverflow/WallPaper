@@ -50,8 +50,8 @@ import ouyj.hyena.com.treadbook.view.animation.ContentScaleAnimation;
 import ouyj.hyena.com.treadbook.view.animation.Rotate3DAnimation;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Animation.AnimationListener
-{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        Animation.AnimationListener {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.fab)
@@ -443,28 +443,35 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
+    /**
+     * 抽屉滑出菜单项的处理
+     * @param item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        //点击的菜单项
         int id = item.getItemId();
-
         if (id == R.id.nav_feedback) {
-            //FeedbackAgent agent = new FeedbackAgent(this);
-            //agent.startFeedbackActivity();
 
         } else if (id == R.id.nav_checkupdate) {
-            checkUpdate(true);
+            //检测是否有应用更新
+            checkUpdate(false);
         }else if (id == R.id.nav_about) {
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            //启动关于活动
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    AboutActivity.class
+            );
             startActivity(intent);
         }
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    /**
+     * 检测应用更新
+     * @param showMessage
+     */
     public void checkUpdate(final boolean showMessage){
         String url = "http://api.fir.im/apps/latest/57be8d56959d6960d5000327";
         OkHttpUtils
@@ -474,39 +481,68 @@ public class MainActivity extends BaseActivity
                 .build()
                 .execute(new StringCallback()
                 {
+                    //请求失败时回调
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         if (showMessage) {
-                            Toast.makeText(MainActivity.this, "检查更新失败！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(
+                                    MainActivity.this,
+                                    "检查更新失败！",
+                                    Toast.LENGTH_SHORT
+                            ).show();
                         }
                     }
-
+                    //请求成功时回调
                     @Override
                     public void onResponse(String response, int id) {
                         try {
+                            //解析请求成功时的返回数据
                             JSONObject jsonObject = new JSONObject(response);
                             String version = jsonObject.getString("version");
+                            //返回当前的版本号并比较
                             String versionCode = CommonUtil.getVersionCode(MainActivity.this) + "";
                             if (versionCode.compareTo(version) < 0){
-                                showUpdateDialog(jsonObject.getString("name"),jsonObject.getString("versionShort"),jsonObject.getString("changelog"),jsonObject.getString("update_url"),MainActivity.this);
+                                //显示对话框
+                                showUpdateDialog(
+                                        jsonObject.getString("name"),
+                                        jsonObject.getString("versionShort"),
+                                        jsonObject.getString("changelog"),
+                                        jsonObject.getString("update_url"),
+                                        MainActivity.this
+                                );
                             }else{
                                 if (showMessage) {
-                                    Toast.makeText(MainActivity.this, "已经是最新版本！", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(
+                                            MainActivity.this,
+                                            "这已经是最新版本了！",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
                                 }
                             }
                         } catch (JSONException e) {
                             if (showMessage) {
-                                Toast.makeText(MainActivity.this, "检查更新失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(
+                                        MainActivity.this,
+                                        "检查应用更新时失败！",
+                                        Toast.LENGTH_SHORT
+                                ).show();
                             }
                             e.printStackTrace();
                         }
                     }
-
                 });
-
     }
-
-    public static void showUpdateDialog(final String name, String version, String changelog, final String updateUrl, final Context context) {
+    /**
+     * 显示发现新版本应用的对话框
+     * @param name
+     * @param version
+     * @param changelog
+     * @param updateUrl
+     * @param context
+     */
+    public static void showUpdateDialog(
+            final String name, String version, String changelog, final String updateUrl, final Context context)
+    {
         String title = "发现新版" + name + "，版本号：" + version;
 
         new android.support.v7.app.AlertDialog.Builder(context).setTitle(title)
@@ -514,11 +550,13 @@ public class MainActivity extends BaseActivity
                 .setPositiveButton("下载", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Uri uri = Uri.parse(updateUrl);   //指定网址
+                        //指定新应用所在Url
+                        Uri uri = Uri.parse(updateUrl);
                         Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_VIEW);           //指定Action
-                        intent.setData(uri);                            //设置Uri
-                        context.startActivity(intent);        //启动Activity
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.setData(uri);
+                        //发送隐式意图并启动活动
+                        context.startActivity(intent);
                     }
                 })
                 .show();
