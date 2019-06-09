@@ -48,7 +48,6 @@ import ouyj.hyena.com.treadbook.util.DisplayUtils;
 import ouyj.hyena.com.treadbook.view.DragGridView;
 import ouyj.hyena.com.treadbook.view.animation.ContentScaleAnimation;
 import ouyj.hyena.com.treadbook.view.animation.Rotate3DAnimation;
-
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Animation.AnimationListener {
@@ -64,14 +63,6 @@ public class MainActivity extends BaseActivity
     DragGridView bookShelf;
 
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//    }
-
-
-
     private WindowManager mWindowManager;
     private AbsoluteLayout wmRootView;
     private View rootView;
@@ -79,6 +70,8 @@ public class MainActivity extends BaseActivity
 
     private List<BookList> bookLists;
     private ShelfAdapter adapter;
+
+
     //点击书本的位置
     private int itemPosition;
     private TextView itemTextView;
@@ -110,30 +103,25 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initData() {
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);//设置导航图标
-
-        //友盟统计
-        //MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        //MobclickAgent.enableEncrypt(true);//6.0.0版本及以后
-
-        //自动提醒反馈建议
-        //FeedbackAgent agent = new FeedbackAgent(this);
-        //agent.sync();
-
         config = Config.getInstance();
+        setSupportActionBar(toolbar);
 
-        //删除窗口背景
-        getWindow().setBackgroundDrawable(null);
+        //设置导航图标
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+
+
+        getWindow().setBackgroundDrawable(null);//删除窗口背景
+
+
         mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         wmRootView = new AbsoluteLayout(this);
         rootView = getWindow().getDecorView();
 //        SQLiteDatabase db = Connector.getDatabase();  //初始化数据库
 
         //typeface = config.getTypeface();
+
+        //为书柜视图设置适配器
         bookLists = DataSupport.findAll(BookList.class);
-
-
         adapter = new ShelfAdapter(MainActivity.this,bookLists);
         bookShelf.setAdapter(adapter);
     }
@@ -243,43 +231,42 @@ public class MainActivity extends BaseActivity
         adapter.setBookList(bookLists);
         closeBookAnimation();
     }
-
     @Override
     protected void onResume(){
         super.onResume();
     }
-
     @Override
     protected void onStop() {
         DragGridView.setIsShowDeleteButton(false);
         super.onStop();
     }
-
     @Override
     protected void onDestroy() {
         DragGridView.setIsShowDeleteButton(false);
         super.onDestroy();
     }
 
+
+    /**
+     * 2秒内按下返会键两次才会退出应用
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (drawer.isDrawerOpen(Gravity.LEFT)) {
                 drawer.closeDrawers();
-            } else {
-                exitBy2Click();
             }
+            else
+                exitBy2Click();
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    /**
-     * 在2秒内按下返回键两次才退出
-     */
     private void exitBy2Click() {
-        // press twice to exit
         Timer tExit;
         if (!isExit) {
             isExit = true; // ready to exit
@@ -303,6 +290,9 @@ public class MainActivity extends BaseActivity
             System.exit(0);
         }
     }
+
+
+
 
     //初始化dialog动画
     private void initAnimation() {
@@ -561,15 +551,4 @@ public class MainActivity extends BaseActivity
                 })
                 .show();
     }
-
-
-
-
-
-
-
-
-
-
-
 }
