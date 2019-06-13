@@ -44,6 +44,8 @@ public class Slider {
     public Slider(Activity activity){
         this.activity=activity;
     }
+
+
     public View initView(){
         View view = View.inflate(activity,R.layout.slider_item,null);
 

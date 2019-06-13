@@ -63,14 +63,16 @@ public class MainActivity extends BaseActivity
     DragGridView bookShelf;
 
 
+    //书列表和适配器对象
+    private List<BookList> bookLists;
+    private ShelfAdapter adapter;
+
+
+
     private WindowManager mWindowManager;
     private AbsoluteLayout wmRootView;
     private View rootView;
     private Typeface typeface;
-
-    private List<BookList> bookLists;
-    private ShelfAdapter adapter;
-
 
     //点击书本的位置
     private int itemPosition;
@@ -92,7 +94,7 @@ public class MainActivity extends BaseActivity
     //动画加载计数器  0 默认  1一个动画执行完毕   2二个动画执行完毕
     private int animationCount=0;
 
-    private static Boolean isExit = false;
+    private static Boolean allowExit = false;
 
     private Config config;
 
@@ -148,23 +150,34 @@ public class MainActivity extends BaseActivity
         bookShelf.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (bookLists.size() > position) {
-                    itemPosition = position;
-                    String bookname = bookLists.get(itemPosition).getBookname();
 
+                //保证点击位置的有效
+                if (bookLists.size() > position) {
+
+                    //点击位置
+                    itemPosition = position;
+
+                    //将当前点击的书移至书柜的第一位
                     adapter.setItemToFirst(itemPosition);
-//                bookLists = DataSupport.findAll(BookList.class);
+
+                    //得到当前书本对象
                     final BookList bookList = bookLists.get(itemPosition);
                     bookList.setId(bookLists.get(0).getId());
+
+                    //得到书本所在路径
                     final String path = bookList.getBookpath();
                     File file = new File(path);
                     if (!file.exists()){
+
+                        //书本不存在
                         new AlertDialog.Builder(MainActivity.this)
                                 .setTitle(MainActivity.this.getString(R.string.app_name))
                                 .setMessage(path + "文件不存在,是否删除该书本？")
                                 .setPositiveButton("删除", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
+                                        //删除数据库记录
                                         DataSupport.deleteAll(BookList.class, "bookpath = ?", path);
                                         bookLists = DataSupport.findAll(BookList.class);
                                         adapter.setBookList(bookLists);
@@ -172,51 +185,11 @@ public class MainActivity extends BaseActivity
                                 }).setCancelable(true).show();
                         return;
                     }
-
-                    ReadActivity.openBook(bookList,MainActivity.this);
-
-//                    if (!isOpen){
-//                        bookLists = DataSupport.findAll(BookList.class);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                    itemTextView = (TextView) view.findViewById(R.id.tv_name);
-//                    //获取item在屏幕中的x，y坐标
-//                    itemTextView.getLocationInWindow(location);
-//
-//                    //初始化dialog
-//                    mWindowManager.addView(wmRootView, getDefaultWindowParams());
-//                    cover = new TextView(getApplicationContext());
-//                    cover.setBackgroundDrawable(getResources().getDrawable(R.mipmap.cover_default_new));
-//                    cover.setCompoundDrawablesWithIntrinsicBounds(null,null,null,getResources().getDrawable(R.mipmap.cover_type_txt));
-//                    cover.setText(bookname);
-//                    cover.setTextColor(getResources().getColor(R.color.read_textColor));
-//                    cover.setTypeface(typeface);
-//                    int coverPadding = (int) CommonUtil.convertDpToPixel(getApplicationContext(), 10);
-//                    cover.setPadding(coverPadding, coverPadding, coverPadding, coverPadding);
-//
-//                    content = new ImageView(getApplicationContext());
-//                    Bitmap contentBitmap = Bitmap.createBitmap(itemTextView.getMeasuredWidth(),itemTextView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-//                    contentBitmap.eraseColor(getResources().getColor(R.color.read_background_paperYellow));
-//                    content.setImageBitmap(contentBitmap);
-//
-//                    AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams(
-//                            itemTextView.getLayoutParams());
-//                    params.x = location[0];
-//                    params.y = location[1];
-//                    wmRootView.addView(content, params);
-//                    wmRootView.addView(cover, params);
-//
-//                    initAnimation();
-//                    if (contentAnimation.getMReverse()) {
-//                        contentAnimation.reverse();
-//                    }
-//                    if (coverAnimation.getMReverse()) {
-//                        coverAnimation.reverse();
-//                    }
-//                    cover.clearAnimation();
-//                    cover.startAnimation(coverAnimation);
-//                    content.clearAnimation();
-//                    content.startAnimation(contentAnimation);
+                    //打开书本
+                    ReadActivity.openBook(
+                            bookList,
+                            MainActivity.this
+                    );
                 }
             }
         });
@@ -248,7 +221,7 @@ public class MainActivity extends BaseActivity
 
 
     /**
-     * 2秒内按下返会键两次才会退出应用
+     * 2秒内连续按返回键两次才会退出应用
      * @param keyCode
      * @param event
      * @return
@@ -267,26 +240,29 @@ public class MainActivity extends BaseActivity
         return super.onKeyDown(keyCode, event);
     }
     private void exitBy2Click() {
-        Timer tExit;
-        if (!isExit) {
-            isExit = true; // ready to exit
+        Timer timer;
+        if (!allowExit) {
+            allowExit = true; // ready to exit
             if(DragGridView.getShowDeleteButton()) {
                 DragGridView.setIsShowDeleteButton(false);
                 //要保证是同一个adapter对象,否则在Restart后无法notifyDataSetChanged
                 adapter.notifyDataSetChanged();
             }else {
-                Toast.makeText(this, this.getResources().getString(R.string.press_twice_to_exit), Toast.LENGTH_SHORT).show(); }
-            tExit = new Timer();
-            tExit.schedule(new TimerTask() {
+                Toast.makeText(
+                        this,
+                        this.getResources().getString(R.string.press_twice_to_exit),
+                        Toast.LENGTH_SHORT).show();
+            }
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    isExit = false; // cancel exit
+                    allowExit = false;
                 }
-            }, 2000); // 2 seconds cancel exit task
+            }, 2000);
 
         } else {
             finish();
-            // call fragments and end streams and services
             System.exit(0);
         }
     }

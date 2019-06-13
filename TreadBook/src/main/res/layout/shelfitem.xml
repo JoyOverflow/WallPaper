@@ -4,7 +4,6 @@
      android:layout_height="match_parent"
      android:gravity="center"
      android:orientation="vertical" >
-
     <LinearLayout
         android:id="@+id/bookItemLinearLayout"
         android:layout_width="match_parent"
@@ -20,10 +19,8 @@
             android:drawableBottom="@drawable/cover_type_txt"
             android:text=""
             android:padding="10dp"
-            android:textColor="@color/read_textColor"
-            />
+            android:textColor="@color/read_textColor"/>
     </LinearLayout>
-
     <ImageButton
         android:id="@+id/ib_close"
         android:layout_width="wrap_content"
@@ -33,6 +30,4 @@
         android:layout_marginTop="36dp"
         android:visibility="gone"
         android:background="@drawable/item_close_button"/>
-
-
 </FrameLayout>

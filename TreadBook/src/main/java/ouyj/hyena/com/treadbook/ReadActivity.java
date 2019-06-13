@@ -464,11 +464,16 @@ public class ReadActivity extends BaseActivity {
     }
 
 
+    /**
+     * 打开指定活动
+     * @param bookList
+     * @param context
+     * @return
+     */
     public static boolean openBook(final BookList bookList, Activity context) {
         if (bookList == null){
             throw new NullPointerException("BookList can not be null");
         }
-
         Intent intent = new Intent(context, ReadActivity.class);
         intent.putExtra(EXTRA_BOOK, bookList);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

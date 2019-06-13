@@ -185,7 +185,7 @@ public class CommonUtil {
     }
 
     /**
-     * @return 版本号
+     * 返回当前的版本号
      */
     public static int getVersionCode(Context context) {
         try {
@@ -197,5 +197,4 @@ public class CommonUtil {
             return 0;
         }
     }
-
 }

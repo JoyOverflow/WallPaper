@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">如风小说阅读</string>
+    <string name="app_name">如风小说</string>
+    <string name="press_twice_to_exit">快速连续点击二次才能退出</string>
+
+
+
+
+
+
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -10,7 +19,7 @@
     <string name="action_add_bookmark">添加书签</string>
     <string name="action_read_book">读书</string>
 
-    <string name="press_twice_to_exit">连续点击才能退出</string>
+
     <string name="root">根目录</string>
     <string name="add_files">加入书架</string>
     <string name="choose_all">全选</string>

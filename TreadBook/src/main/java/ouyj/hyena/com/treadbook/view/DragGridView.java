@@ -136,32 +136,42 @@ public class DragGridView extends GridView implements View.OnClickListener{
     private static boolean isMove = false;
     private Context mcontext;
     private View firtView;
-    private TextView firstItemTextView;
-    private final int[] firstLocation = new int[2];
+    private TextView firstTextView;
+    private final int[] location = new int[2];
     private int i = 0;
 
+    /**
+     * 构造方法
+     * @param context
+     */
     public DragGridView(Context context) {
         this(context, null);
     }
-
     public DragGridView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
-
     public DragGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         mStatusHeight = getStatusHeight(context);
 
-        background = BitmapFactory.decodeResource(getResources(),
-                R.drawable.bookshelf_layer_center);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.bookshelf_layer_center);
         bookshelf_dock = BitmapFactory.decodeResource(getResources(), R.drawable.bookshelf_dock);
+
         if(!mNumColumnsSet){
             mNumColumns = AUTO_FIT;
         }
         mcontext = context;
     }
+
+
+
+
+
+
 
     private Handler mHandler = new Handler();
 
@@ -635,8 +645,8 @@ public class DragGridView extends GridView implements View.OnClickListener{
         }
         if(i == 1) {
             firtView = getChildAt(0);
-            firstItemTextView =  firtView.findViewById(R.id.tv_name);
-            firstItemTextView.getLocationInWindow(firstLocation);
+            firstTextView = firtView.findViewById(R.id.tv_name);
+            firstTextView.getLocationInWindow(location);
         }
 
         super.dispatchDraw(canvas);
@@ -673,7 +683,7 @@ public class DragGridView extends GridView implements View.OnClickListener{
     }
 
     public int[] getFirstLocation() {
-        return firstLocation;
+        return location;
     }
 
 }

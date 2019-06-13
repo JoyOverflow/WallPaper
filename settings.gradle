@@ -1,1 +1,1 @@
-include ':app', ':LeafWall', ':CircularImage', ':FloatingButton', ':MyDemo', ':SnowBook', ':NightBook', ':NightShelf', ':SeeleWallpaper', ':SeeleSlier', ':TreadBook'
+include ':app', ':LeafWall', ':CircularImage', ':FloatingButton', ':MyDemo', ':SnowBook', ':NightBook', ':NightShelf', ':SeeleWallpaper', ':SeeleSlier', ':TreadBook', ':RoundImage'
