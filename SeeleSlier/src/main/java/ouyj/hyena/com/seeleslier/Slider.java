@@ -143,7 +143,7 @@ public class Slider {
      */
     private void initdian(int position){
         //暂注释，不要删除
-        /*
+
         ll_layout.removeAllViews();
         for(int i=0;i<mImageId.length - 2;i++){
             ImageView dian = new ImageView(activity);
@@ -166,7 +166,7 @@ public class Slider {
             dian.setLayoutParams(param);
             ll_layout.addView(dian);
         }
-        */
+        
     }
 
     /**
